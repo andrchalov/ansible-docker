@@ -45,6 +45,21 @@
     name: docker-py
     state: present
 
+- name: Ensure /etc/docker directory exists
+  file:
+    dest: /etc/docker
+    mode: "0700"
+    state: directory
+
+- name: Create /etc/docker/daemon.json
+  copy:
+    content: |
+      {{docker_daemon_json_entries | to_nice_json}}
+    dest: /etc/docker/daemon.json
+  notify: restart docker
+
+- meta: flush_handlers
+
 - name: Ensure Docker is started and enabled at boot
   service:
     name: docker
