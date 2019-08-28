@@ -14,14 +14,8 @@
 
 - name: Ensure depdencies are installed
   apt:
-    name: '{{ item }}'
+    name: ['apt-transport-https', 'ca-certificates', 'software-properties-common', 'python-dev', 'python-pip']
     state: present
-  with_items:
-    - apt-transport-https
-    - ca-certificates
-    - software-properties-common
-    - python-dev
-    - python-pip
 
 - name: Add Docker apt key
   apt_key:
@@ -39,6 +33,10 @@
   apt:
     name: '{{docker_package}}'
     state: '{{docker_package_state}}'
+
+- name: Install pip
+  apt:
+    name: pip
 
 - name: Install docker-py
   pip:
