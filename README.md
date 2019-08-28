@@ -1,2 +1,2 @@
-# ansible-docker-ubuntu
+# ansible-role-docker
 Ansible role for installing docker on Ubuntu
