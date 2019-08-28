@@ -1,12 +1,21 @@
 ---
+language: python
 services: docker
 
-script:
-  - export container_id=$(date +%s)
-  - export cleanup=false
+env:
+  global:
+    - ROLE_NAME: docker
+  matrix:
+    - MOLECULE_DISTRO: ubuntu1804
+    - MOLECULE_DISTRO: ubuntu1604
 
+install:
+  # Install test dependencies.
+  - pip install molecule docker
+
+script:
   # Run tests.
-  - ${PWD}/tests/test.sh
+  - molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

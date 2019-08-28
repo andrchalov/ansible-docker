@@ -4,17 +4,11 @@
     msg: '{{ ansible_distribution_version }} is not an acceptable version of Ubuntu for this role'
   when: ansible_distribution_version is version_compare(15.04, '<')
 
-- name: Ensure old versions of Docker are not installed
-  package:
-    name: '{{ item }}'
-    state: absent
-  with_items:
-    - docker
-    - docker-engine
-
 - name: Ensure depdencies are installed
   apt:
     name: ['apt-transport-https', 'ca-certificates', 'software-properties-common', 'python-dev', 'python-pip']
+    update_cache: yes
+    cache_valid_time: 86400
     state: present
 
 - name: Add Docker apt key
@@ -31,8 +25,8 @@
 
 - name: Install Docker
   apt:
-    name: '{{docker_package}}'
-    state: '{{docker_package_state}}'
+    name: '{{ docker_package }}'
+    state: '{{ docker_package_state }}'
 
 - name: Install docker-py
   pip:
