@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Andrey Chalov
   description: Ansible role for installing docker on Ubuntu

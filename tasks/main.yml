@@ -7,7 +7,7 @@
 - name: Ensure depdencies are installed
   apt:
     name: ['apt-transport-https', 'ca-certificates', 'software-properties-common', 'python-dev', 'python-pip']
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 86400
     state: present
 
@@ -21,7 +21,7 @@
   apt_repository:
     repo: '{{ docker_apt_repository }}'
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install Docker
   apt:
@@ -42,7 +42,7 @@
 - name: Create /etc/docker/daemon.json
   copy:
     content: |
-      {{docker_daemon_json_entries | to_nice_json}}
+      {{ docker_daemon_json_entries | to_nice_json }}
     dest: /etc/docker/daemon.json
   notify: restart docker
 
@@ -52,4 +52,4 @@
   service:
     name: docker
     state: started
-    enabled: yes
+    enabled: true

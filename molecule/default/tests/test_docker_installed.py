@@ -10,4 +10,4 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 def test_docker_installed(host):
     run = host.run('docker ps')
 
-    assert run.exit_status==0
+    assert run.exit_status == 0
