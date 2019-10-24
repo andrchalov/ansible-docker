@@ -6,7 +6,7 @@
 
 - name: Ensure depdencies are installed
   apt:
-    name: ['apt-transport-https', 'ca-certificates', 'software-properties-common', 'python-dev', 'python-pip']
+    name: ['apt-transport-https', 'ca-certificates', 'software-properties-common', 'python3-dev', 'python3-pip']
     update_cache: true
     cache_valid_time: 86400
     state: present
